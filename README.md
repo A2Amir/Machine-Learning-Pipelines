@@ -18,6 +18,7 @@ Before I can classify any posts, I'll need to clean and tokenize the text data. 
 
 
 ## Machine Learning Workflow without pipelines
+
 Now I 've cleaned and tokenized the text data, it's time to complete the rest of my Machine Learning workflow. In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/2_ml_workflow.ipynb) I first build out the normal way (without pipelines) to create a classifier then test my classifier. After buildin and testing my classifier I am going to refactor these steps into the two functions.
 
 ## Machine Learning Workflow with pipelines
@@ -33,23 +34,19 @@ Below is a simple example, where we generate features from text data using **Cou
     clf =  RandomForestClassifier()
 
     # Fit and/or transform each to the data (training step)
-
     X_train_count = vect.fit_transform(X_train)
     X_train_tfidf = tfidf.fit_transform(X_train_count)
     clf.fit(X_train_tfidf, y_train)
     
     # Transform test data (test step)
-    
     X_test_count = vect.transform(X_test)
     X_test_tfidf = tfidf.transform(X_test_count)
 ~~~
 
-Each of these three objects (**CountVectoriser, TfidfTransformer and RandomForestClassifier**) is called an **estimator**, which [scikit-learn states](https://scikit-learn.org/stable/tutorial/statistical_inference/settings.html), is any object that learns from data, whether it's a classification, regression or clustering algorithm, or a transformer that extracts or filter is useful features from raw data. Because it learns from data, every estimator must have a fit method that takes a dataset. So, each of these three estimators have a fit method.  Additionally, **CountVectoriser and TfidfTransformer**, are a specific type of estimator called a **transformer**, meaning it has a transform method. 
-
- The final estimator(**RandomForestClassifier**) is a predictor, which although it doesn't have a transform method,has a predictor method. 
+Each of these three objects (**CountVectoriser, TfidfTransformer and RandomForestClassifier**) is called an **estimator**, which [scikit-learn states](https://scikit-learn.org/stable/tutorial/statistical_inference/settings.html), is any object that learns from data, whether it's a classification, regression or clustering algorithm, or a transformer that extracts or filter useful features from raw data. Because it learns from data, every estimator must have a fit method that takes a dataset. Each of these three estimators have a fit method.  Additionally, **CountVectoriser and TfidfTransformer**, are a specific type of estimator called a **transformer**, meaning it has a transform method. The final estimator(**RandomForestClassifier**) is a predictor, which although it doesn't have a transform method,has a predictor method. 
  
  
-In machine learning tasks, it's pretty common to have a very specific sequence of transformers to fit to data before applying a final estimator.  As above, we'd have to initialize all the tree estimators (initialize step) , fit and transform the training data for each of the transformers and then fit to the final estimator (training step). In the test step we  have to call transform for each transformer again to the test data and finally call predict on the final estimator. 
+In machine learning tasks, it's pretty common to have a very specific sequence of transformers to fit to data before applying a final estimator.  As seen above, we'd have to initialize all the tree estimators (initialize step) , fit and transform the training data for each of the transformers and then fit to the final estimator (training step). In the test step we  have to call transform for each transformer again to the test data and finally call predict on the final estimator. 
 
 
 We could actually automate all of this fitting, transforming and predicting by chaining these estimators together into one single estimator object. That single estimator would be **scikit-learns pipeline**. 
@@ -65,7 +62,7 @@ pipline = Pipline(['vect' : CountVectorizer(),
                   'clf' : RandomForestClassifier()]
 ~~~
 
-By fitting our pipeline to the training data, we're accomplishing exactly what we would by fitting and transforming each of the objects of the training step to our training data one by one. 
+By fitting our pipeline to the training data, we're accomplishing exactly what we would do in the training step as the first code shows. 
 
 
 ~~~python
@@ -73,8 +70,7 @@ By fitting our pipeline to the training data, we're accomplishing exactly what w
 pipline.fit(X_train)
 ~~~
 
-Similarly, when we call predict on our pipeline to our test data, we're accomplishing what we would by calling transform on each of
-our transformer objects of the test step to our test data and then calling predict on our final estimator. 
+Similarly, when we call predict on our pipeline to our test data, we're accomplishing what we would do in the training step as the first code shows.  
 
 
 ~~~python
