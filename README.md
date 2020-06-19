@@ -15,3 +15,7 @@ In this Repo, I will automate my machine-learning workflows with pipelines using
 ## Tokenization
 
 Before I can classify any posts, I'll need to clean and tokenize the text data. Use what I learned from [the last Repo on NLP](https://github.com/A2Amir/NLP-and-Pipelines) to implement the function `tokenize`. Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/1_clean_tokenize.ipynb) to tokenize the text data.
+
+
+## Machine Learning Workflow
+Now I 've cleaned and tokenized the text data, it's time to complete the rest of my Machine Learning workflow. In [this jupyter notebook]() I first build out the normal way (without pipelines) to create a classifier then test my classifier. After buildin and testing my classifier I am going to refactor these steps into the two functions.
