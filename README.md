@@ -113,4 +113,26 @@ both TFIDF and the number of characters text length for each document, I would u
 
 **Feature union** is another class in Scikit-learn's Pipeline module that allows us to perform steps in parallel and take the union of the results for the next step.   In more complex workflows, multiple feature unions are often used within pipelines, and multiple pipelines are used within feature unions. 
 
-Check out [this jupyter notebook]() to implement Feature Unions
+Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/4_feature_union.ipynb) to implement Feature Unions
+
+## Creating Custom Transformer
+
+In the last section, I used **a custom transformer** that extracted whether each text started with a verb. You can implement a custom transformer yourself by extending [the base class in Scikit-Learn](https://scikit-learn.org/stable/modules/generated/sklearn.base.BaseEstimator.html). Take a look at a a very simple example below that multiplies the input data by ten. 
+
+~~~python
+import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin
+
+class TenMultiplier(BaseEstimator, TransformerMixin):
+    def __init__(self):
+        pass
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        return X * 10
+
+~~~
+
+As explained before, **all estimators** have **a fit** method, and since this is **a transformer**, it also has **a transform** method.
