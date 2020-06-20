@@ -101,7 +101,7 @@ y_pred = pipeline.predict(X_test)
   
 Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/3_pipeline.ipynb) to build out the pipeline.
 
-## 2. Pipelines and Feature Unions
+## 3. Pipelines and Feature Unions
 
 Until now I used pipelines to chain transformations, and an estimator together to define a clear sequence for the workflow. But what if we want to engineer a feature from the dataset while simultaneously engineering another feature? for example, if I wanted to extract
 both TFIDF and the number of characters text length for each document, I would use **feature unions**.
@@ -115,7 +115,7 @@ both TFIDF and the number of characters text length for each document, I would u
 
 Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/4_feature_union.ipynb) to implement Feature Unions
 
-## 3. Creating Custom Transformer
+## 4. Creating Custom Transformer
 
 In the last section, I used **a custom transformer** that extracted whether each text started with a verb. You can implement a custom transformer yourself by extending [the base class in Scikit-Learn](https://scikit-learn.org/stable/modules/generated/sklearn.base.BaseEstimator.html). Take a look at a a very simple example below that multiplies the input data by ten. 
 
