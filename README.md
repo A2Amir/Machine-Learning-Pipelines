@@ -136,3 +136,22 @@ class TenMultiplier(BaseEstimator, TransformerMixin):
 ~~~
 
 As explained before, **all estimators** have **a fit** method, and since this is **a transformer**, it also has **a transform** method.
+
+   * **FIT METHOD:** This takes in **a 2d array X** for the feature data and **a 1d array y** for the target labels. Inside the fit method, we simply return self. This allows us to chain methods together, since the result on calling fit on the transformer is still the transformer object. This method is required to be compatible with scikit-learn.
+   
+   * **TRANSFORM METHOD:** The transform function is where we include the code that well, transforms the data. In this case, we return the data in X multiplied by 10. This transform method also takes **a 2d array X**.
+
+Let's test my new transformer, by entering the code below in the interactive python interpreter in the terminal, ipython. We can also do this in Jupyter notebook.
+
+~~~python
+multiplier = TenMultiplier()
+
+X = np.array([6, 3, 7, 4, 7])
+multiplier.transform(X)
+~~~
+
+This outputs the following:
+
+     array([60, 30, 70, 40, 70])
+     
+In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/5_%20a_custom_transformer%20.ipynb) I'll create a custom transformer that converts all text to lowercase. check it for more information.
