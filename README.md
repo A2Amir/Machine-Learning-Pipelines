@@ -82,16 +82,24 @@ Similarly, when we call predict on our pipeline to our test data, we're accompli
 y_pred = pipeline.predict(X_test)
 ~~~
 
-Not only does pipline make our code is so much shorter and simpler, it has other great advantages: 
+**Not only does pipline make our code is so much shorter and simpler, it has other great advantages:**
 
 #### 1. Simplicity and Convencience
 
    * **Automates repetitive steps** - Chaining all of your steps into one estimator allows you to fit and predict on all steps of your sequence automatically with one call.
+   
    * **Easily understandable workflow** - Not only does this make your code more concise, it also makes your workflow much easier to understand and modify.
+   
    * **Reduces mental workload** - Because Pipeline automates the intermediate actions required to execute each step, it reduces the mental burden of having to keep track of all your data transformations.
    
 #### 2. Optimizing Entire Workflow
 
    * **GRID SEARCH** - By running grid search on your pipeline, you're able to optimize your entire workflow, including data transformation and modeling steps (GRID SEARCH is a method that automates the process of testing different hyper parameters to optimize a model).
    
-   * **Preventing Data leakage** -Using Pipeline, all transformations for data preparation and feature extractions occur within each fold of the cross validation process. This prevents common mistakes where you’d allow your training process to be influenced by your test data
+   * **Preventing Data leakage** -Using Pipeline, all transformations for data preparation and feature extractions occur within each fold of the cross validation process. This prevents common mistakes where you’d allow your training process to be influenced by your test data.
+   
+  
+Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/3_pipeline.ipynb) to build out the pipeline.
+
+## Pipelines and Feature Unions
+
