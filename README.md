@@ -9,19 +9,18 @@ In this Repo, I will build pipelines to automate the machine learning workflows 
 * Grid search over the entire workflow.
 
 
-In this Repo, I will automate my machine-learning workflows with pipelines using [the dataset of corporate messaging](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/dataset/corporate_messaging.csv) as a case study. This corporate message data is from one of the free datasets provided on the [Figure Eight Platform](https://appen.com/resources/datasets/),  Each row of the dataset contains information about a social media post from different corporations and contains a column for the category of the post. In the category column, you can see that **each post is classified as information (objective statements about the company or its activities), action (such as messages that ask for votes or ask users to click on links), dialogue (replies to users) or exclude (a miscellaneous column).** 
+In this Repo, I am going to implement a messaging classifier by automating my machine-learning workflows with pipelines using [the dataset of corporate messaging](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/dataset/corporate_messaging.csv) as a case study. This corporate message data is from one of the free datasets provided on the [Figure Eight Platform](https://appen.com/resources/datasets/),  Each row of the dataset contains information about a social media post from different corporations and contains a column for the category of the post. In the category column, you can see that **each post is classified as information (objective statements about the company or its activities), action (such as messages that ask for votes or ask users to click on links), dialogue (replies to users) or exclude (a miscellaneous column).** 
 
 
-## Tokenization
 
-Before I can classify any posts, I'll need to clean and tokenize the text data. Use what I learned from [the last Repo on NLP](https://github.com/A2Amir/NLP-and-Pipelines) to implement the function `tokenize`. Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/1_clean_tokenize.ipynb) to tokenize the text data.
+Before I can classify any messaging, I'll need **to clean and tokenize the text data**. Use what I learned from [the last Repo on NLP](https://github.com/A2Amir/NLP-and-Pipelines) to implement the function `tokenize`. Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/1_clean_tokenize.ipynb) to tokenize the text data.
 
 
-## Machine Learning Workflow without pipelines
+## 1. Machine Learning Workflow without pipelines
 
-Now I 've cleaned and tokenized the text data, it's time to complete the rest of my Machine Learning workflow. In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/2_ml_workflow.ipynb) I first build out the normal way (without pipelines) to create a classifier then test my classifier. After buildin and testing my classifier I am going to refactor these steps into the two functions.
+Now I 've cleaned and tokenized the text data, it's time to complete the rest of my Machine Learning workflow. In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/2_ml_workflow.ipynb) I first build out the normal way (without pipelines) to create a classifier then test my classifier. After buildin and testing my classifier I am going to refactor these steps (creating and testing classifier) into the two functions.
 
-## Machine Learning Workflow with pipelines
+## 2. Machine Learning Workflow with pipelines
 
 Below is a simple code from the last step, where we generate features from text data using **CountVectoriser and TfidfTransformer** and then fit it to a **RandomForestClassifier**.
 
@@ -101,7 +100,7 @@ y_pred = pipeline.predict(X_test)
   
 Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/3_pipeline.ipynb) to build out the pipeline.
 
-## Pipelines and Feature Unions
+## 2. Pipelines and Feature Unions
 
 Until now I used pipelines to chain transformations, and an estimator together to define a clear sequence for the workflow. But what if we want to engineer a feature from the dataset while simultaneously engineering another feature? for example, if I wanted to extract
 both TFIDF and the number of characters text length for each document, I would use **feature unions**.
@@ -115,7 +114,7 @@ both TFIDF and the number of characters text length for each document, I would u
 
 Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/4_feature_union.ipynb) to implement Feature Unions
 
-## Creating Custom Transformer
+## 3. Creating Custom Transformer
 
 In the last section, I used **a custom transformer** that extracted whether each text started with a verb. You can implement a custom transformer yourself by extending [the base class in Scikit-Learn](https://scikit-learn.org/stable/modules/generated/sklearn.base.BaseEstimator.html). Take a look at a a very simple example below that multiplies the input data by ten. 
 
