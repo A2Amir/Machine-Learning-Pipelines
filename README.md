@@ -107,7 +107,7 @@ Until now I used pipelines to chain transformations, and an estimator together t
 both TFIDF and the number of characters text length for each document, I would use **feature unions**.
 
 <p align="center">
-  <img src="/Images/1.PNG" alt="" width="500" height="350" >
+  <img src="/Images/1.PNG" alt="" width="500" height="300" >
  </p>
 
 
