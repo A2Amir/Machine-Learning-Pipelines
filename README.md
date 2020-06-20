@@ -103,3 +103,14 @@ Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pip
 
 ## Pipelines and Feature Unions
 
+Until now I used pipelines to chain transformations, and an estimator together to define a clear sequence for the workflow. But what if we want to engineer a feature from the dataset while simultaneously engineering another feature? for example, if I wanted to extract
+both TFIDF and the number of characters text length for each document, I would use **feature unions**.
+
+<p align="center">
+  <img src="/Images/1.PNG" alt="" width="500" height="350" >
+ </p>
+
+
+**Feature union** is another class in Scikit-learn's Pipeline module that allows us to perform steps in parallel and take the union of the results for the next step.   In more complex workflows, multiple feature unions are often used within pipelines, and multiple pipelines are used within feature unions. 
+
+Check out [this jupyter notebook]() to implement Feature Unions
