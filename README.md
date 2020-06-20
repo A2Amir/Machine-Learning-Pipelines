@@ -56,9 +56,11 @@ To create this pipeline, we just need a list of key value pairs, where the key i
 
 ~~~python
 #(initialize step) 
-pipline = Pipline(['vect' : CountVectorizer(),
-                  'tfidf' : TfidfTransformer(),
-                  'clf' : RandomForestClassifier()]
+pipline = Pipline([
+                   ('vect' , CountVectorizer()),
+                   ('tfidf' , TfidfTransformer()),
+                   ('clf' , RandomForestClassifier())
+                  ]
 ~~~
 
 By fitting our pipeline to the training data, we're accomplishing exactly what we would do in the training step as the first code shows. 
