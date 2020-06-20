@@ -56,11 +56,13 @@ To create this pipeline, we just need a list of key value pairs, where the key i
 
 ~~~python
 #(initialize step) 
-pipline = Pipline([
-                   ('vect' , CountVectorizer()),
-                   ('tfidf' , TfidfTransformer()),
-                   ('clf' , RandomForestClassifier())
-                  ]
+    # build pipeline
+    pipeline = Pipeline([
+                        ('vect',CountVectorizer(tokenizer=tokenize)),
+                        ('tfidf',TfidfTransformer()),
+                        ( 'clf',RandomForestClassifier())
+                        ])
+         
 ~~~
 
 By fitting our pipeline to the training data, we're accomplishing exactly what we would do in the training step as the first code shows. 
@@ -68,7 +70,8 @@ By fitting our pipeline to the training data, we're accomplishing exactly what w
 
 ~~~python
 #(training step)
-pipline.fit(X_train)
+pipeline.fit(X_train, y_train)
+
 ~~~
 
 Similarly, when we call predict on our pipeline to our test data, we're accomplishing what we would do in the training step as the first code shows.  
@@ -76,7 +79,7 @@ Similarly, when we call predict on our pipeline to our test data, we're accompli
 
 ~~~python
 #(test step)
-pipline.predict(X_test)
+y_pred = pipeline.predict(X_test)
 ~~~
 
 Not only does pipline make our code is so much shorter and simpler, it has other great advantages: 
