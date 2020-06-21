@@ -166,7 +166,7 @@ a grid of parameters or a set of values to check. Your computer automates the pr
   <img src="/Images/1.gif" alt="" width="400" height="400" >
  </p>
 
-Here is a simple example that uses grid search to find parameters for **a support vector classifier**. All you need to do is create a dictionary of parameters to search, using **keys for the names of the parameters** and **values for the list of parameter values** to check. Then, pass the model and parameter grid to the **grid search object**. Now when you call fit on this grid search object, it will run cross validation on all different combinations of these parameters to find the best combination of parameters for the model.
+Below is a simple example that uses grid search to find parameters for **a support vector classifier**. All you need to do is create a dictionary of parameters to search, using **keys for the names of the parameters** and **values for the list of parameter values** to check. Then, pass the model and parameter grid to the **grid search object**. Now when you call fit on this grid search object, it will run cross validation on all different combinations of these parameters to find the best combination of parameters for the model.
 
 ~~~python
 parameters = {
@@ -180,6 +180,7 @@ clf.fit(X_train, y_train)
 ~~~
 
 Now consider if we had **a data preprocessing step**, where we standardized the data using **StandardScaler** like below.
+
 ~~~python
 scaler = StandardScaler()
 scaled_data = scaler.fit_transform(X_train)
