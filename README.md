@@ -155,3 +155,13 @@ This outputs the following:
      array([60, 30, 70, 40, 70])
      
 In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/5_custom_transformer.ipynb) I'll create **a custom transformer** that converts all text to lowercase. check it for more information.
+
+## 5. Pipelines and Grid Search
+
+Most machine learning algorithms have a set of parameters that need tuning. **Grid search** is a tool that allows you to define
+a grid of parameters or a set of values to check. Your computer automates the process of trying out all possible combination of values.
+**Grid search scores each combination with cross-validation and uses the cross-validation score to determine the parameters that produce the most optimal model.** Running grid search on your pipeline allows you to try many parameter values thoroughly and conveniently for both your data transformations and estimators. 
+
+<p align="center">
+  <img src="/Images/1.gif" alt="" width="500" height="300" >
+ </p>
