@@ -221,3 +221,9 @@ y_pred = cv.predict(X_test)
 ~~~
 
 Now, since the rescaling is included as part of the pipeline, **the standardization doesn't happen until we run grid search meaning in each fold of cross validation, the rescaling is done only on the data that the model is trained on, preventing leakage from the validation set**. As you can see, pipelines are very valuable to removing the risk of data leakage during the data preparation process.
+
+**Note on Run Time:** Running grid search can take a while, especially if you are searching over a lot of parameters! If you want to reduce it to a few minutes, try commenting out some of your parameters to grid search over just 1 or 2 parameters with a small number of values each. 
+
+Check out [this jupyter notebook]() to get more infomation about Pipelines and Grid Search.
+
+
