@@ -163,5 +163,33 @@ a grid of parameters or a set of values to check. Your computer automates the pr
 **Grid search scores each combination with cross-validation and uses the cross-validation score to determine the parameters that produce the most optimal model.** Running grid search on your pipeline allows you to try many parameter values thoroughly and conveniently for both your data transformations and estimators. 
 
 <p align="center">
-  <img src="/Images/1.gif" alt="" width="500" height="300" >
+  <img src="/Images/1.gif" alt="" width="400" height="400" >
  </p>
+
+Here is a simple example that uses grid search to find parameters for **a support vector classifier**. All you need to do is create a dictionary of parameters to search, using **keys for the names of the parameters** and **values for the list of parameter values** to check. Then, pass the model and parameter grid to the **grid search object**. Now when you call fit on this grid search object, it will run cross validation on all different combinations of these parameters to find the best combination of parameters for the model.
+
+~~~python
+parameters = {
+    'kernel': ['linear', 'rbf'],
+    'C':[1, 10]
+}
+
+svc = SVC()
+clf = GridSearchCV(svc, parameters)
+clf.fit(X_train, y_train)
+~~~
+
+Now consider if we had **a data preprocessing step**, where we standardized the data using **StandardScaler** like below.
+~~~python
+scaler = StandardScaler()
+scaled_data = scaler.fit_transform(X_train)
+
+parameters = {
+    'kernel': ['linear', 'rbf'],
+    'C':[1, 10]
+}
+
+svc = SVC()
+clf = GridSearchCV(svc, parameters)
+clf.fit(scaled_data, y_train)
+~~~
