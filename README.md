@@ -166,7 +166,7 @@ a grid of parameters or a set of values to check. Your computer automates the pr
   <img src="/Images/1.gif" alt="" width="400" height="400" >
  </p>
 
-Below is a simple example that uses grid search to find parameters for **a support vector classifier**. All you need to do is create a dictionary of parameters to search, using **keys for the names of the parameters** and **values for the list of parameter values** to check. Then, pass the model and parameter grid to the **grid search object**. Now when you call fit on this grid search object, it will run cross validation on all different combinations of these parameters to find the best combination of parameters for the model.
+Below is a simple example that uses grid search to find parameters for **a support vector classifier**. All you need to do is create a dictionary of parameters to search, using **keys for the names of the parameters** and **values for the list of parameter values** to check, then, pass the model and parameter grid to the **grid search object**. Now when you call fit on this grid search object, it will run cross validation on all different combinations of these parameters to find the best combination of parameters for the model.
 
 ~~~python
 parameters = {
@@ -179,7 +179,7 @@ clf = GridSearchCV(svc, parameters)
 clf.fit(X_train, y_train)
 ~~~
 
-Now consider if we had **a data preprocessing step**, where we standardized the data using **StandardScaler** like below.
+Now consider if we had **a data preprocessing step**, where we standardized the data, for example  using **StandardScaler** like below.
 
 ~~~python
 scaler = StandardScaler()
@@ -194,3 +194,30 @@ svc = SVC()
 clf = GridSearchCV(svc, parameters)
 clf.fit(scaled_data, y_train)
 ~~~
+
+This may seem okay at first, but if you standardize your whole training dataset, and then use cross validation in grid search to evaluate your model, you've got **data leakage**, meaning, **Grid search uses cross validation to score your model, meaning it splits your training data into folds of train and validation sets, trains your model on the train set, and scores it on the validation set, and does this multiple times**.
+
+However, each time, or fold, that this happens, the model already has knowledge of the validation set because all the data was rescaled based on the distribution of the whole training dataset. **Important factors like the mean and standard deviation are influenced by the whole dataset.** This means the model perform better than it really should on unseen data, since information about the validation set is always baked into the rescaled values of your train dataset.
+
+The way to fix this, would be to make sure you run standard scaler only on the training set, and not the validation set within each fold of cross validation. Pipelines allow you to do just this (see below).
+
+~~~python
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('clf', SVC())
+])
+
+parameters = {
+    'scaler__with_mean': [True, False]
+    'clf__kernel': ['linear', 'rbf'],
+    'clf__C':[1, 10]
+}
+
+cv = GridSearchCV(pipeline, param_grid=parameters)
+
+cv.fit(X_train, y_train)
+y_pred = cv.predict(X_test)
+
+~~~
+
+Now, since the rescaling is included as part of the pipeline, **the standardization doesn't happen until we run grid search meaning in each fold of cross validation, the rescaling is done only on the data that the model is trained on, preventing leakage from the validation set**. As you can see, pipelines are very valuable to removing the risk of data leakage during the data preparation process.
