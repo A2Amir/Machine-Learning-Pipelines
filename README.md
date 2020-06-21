@@ -154,4 +154,4 @@ This outputs the following:
 
      array([60, 30, 70, 40, 70])
      
-In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/5_%20a_custom_transformer%20.ipynb) I'll create **a custom transformer** that converts all text to lowercase. check it for more information.
+In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/5_custom_transformer.ipynb) I'll create **a custom transformer** that converts all text to lowercase. check it for more information.
