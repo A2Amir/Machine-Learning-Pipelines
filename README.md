@@ -1,6 +1,6 @@
 #  Machine Learning  Pipelines
 
-In this Repo, I am going to implement a message classifier by automating my machine-learning workflows with pipelines using [the dataset of corporate messaging](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/dataset/corporate_messaging.csv) as a case study. you will learn about:
+In this Repo, I am going to implement a message classifier by automating the machine-learning workflows with pipelines using [the dataset of corporate messaging](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/dataset/corporate_messaging.csv) as a case study. you will learn about:
 
 
 
