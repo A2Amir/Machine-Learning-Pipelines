@@ -23,7 +23,7 @@ Now I 've cleaned and tokenized the text data, it's time to complete the rest of
 
 ## 2. Machine Learning Workflow with pipelines
 
-Below is a simple code from the last step, where we generate features from text data using **CountVectoriser and TfidfTransformer** and then fit it to a **RandomForestClassifier**.
+Below is a simple code from the last step, where I generate features from text data using **CountVectoriser and TfidfTransformer** and then fit it to a **RandomForestClassifier**.
 
 ~~~python
 
@@ -46,10 +46,10 @@ Below is a simple code from the last step, where we generate features from text 
 Each of these three objects (**CountVectoriser, TfidfTransformer and RandomForestClassifier**) is called an **estimator**, which [scikit-learn](https://scikit-learn.org/stable/tutorial/statistical_inference/settings.html) states, is any object that learns from data, whether it's a classification, regression or clustering algorithm, or a transformer that extracts or filter useful features from raw data. Because it learns from data, **every estimator** must have **a fit method** that takes a dataset. Each of these three estimators have a fit method.  Additionally, **CountVectoriser and TfidfTransformer**, are a specific type of estimator called a **transformer**, meaning it has **a transform** method. The final estimator(**RandomForestClassifier**) is **a predictor**, which although it doesn't have a transform method,has **a predictor method**. 
  
  
-In machine learning tasks, it's pretty common to have a very specific sequence of transformers to fit to data before applying a final estimator.  As seen above, we'd have to initialize all the tree estimators (initialize step) , fit and transform the training data for each of the transformers and then fit to the final estimator (training step). In the test step we  have to call transform for each transformer again to the test data and finally call predict on the final estimator. 
+In machine learning tasks, it's pretty common to have a very specific sequence of transformers to fit to data before applying a final estimator.  As seen above, we'd have to initialize all the tree estimators (see initialize step above) , fit and transform the training data for each of the transformers and then fit to the final estimator (see training step above). In the test step we  have to call transform for each transformer again to the test data and finally call predict on the final estimator. 
 
 
-We could actually automate all of this fitting, transforming and predicting by chaining these estimators together into one single estimator object. That single estimator would be **scikit-learns pipeline**. 
+**We could actually automate all of this fitting, transforming and predicting by chaining these estimators together into one single estimator object. That single estimator would be scikit-learns pipeline**. 
 
 
 To create this pipeline, we just need a list of key value pairs, where the key is a string containing what you want to name the step and the value is the estimator object(see below). 
@@ -65,7 +65,7 @@ To create this pipeline, we just need a list of key value pairs, where the key i
          
 ~~~
 
-By fitting our pipeline to the training data, we're accomplishing exactly what we would do in the training step as the first code shows. 
+By fitting the pipeline to the training data, we're accomplishing exactly what we did  in the training step as the first code shows. 
 
 
 ~~~python
@@ -74,7 +74,7 @@ pipeline.fit(X_train, y_train)
 
 ~~~
 
-Similarly, when we call predict on our pipeline to our test data, we're accomplishing what we would do in the training step as the first code shows.  
+Similarly, when we call predict on our pipeline to our test data, we're accomplishing what we did in the training step as the first code shows.  
 
 
 ~~~python
@@ -103,7 +103,7 @@ Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pip
 
 ## 3. Pipelines and Feature Unions
 
-Until now I used pipelines to chain transformations, and an estimator together to define a clear sequence for the workflow. But what if we want to engineer a feature from the dataset while simultaneously engineering another feature? for example, if I wanted to extract
+Until now I used pipelines to chain transformations, and an estimator together to define a clear sequence for the workflow. But what if I want to engineer a feature from the dataset while simultaneously engineering another feature? for example, if I wanted to extract
 both TFIDF and the number of characters text length for each document, I would use **feature unions**.
 
 <p align="center">
@@ -113,7 +113,7 @@ both TFIDF and the number of characters text length for each document, I would u
 
 **Feature union** is another class in Scikit-learn's Pipeline module that allows us to perform steps in parallel and take the union of the results for the next step.   In more complex workflows, multiple feature unions are often used within pipelines, and multiple pipelines are used within feature unions. 
 
-Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/4_feature_union.ipynb) to implement Feature Unions
+Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/4_feature_union.ipynb) to learn about Feature Unions
 
 ## 4. Creating Custom Transformer
 
@@ -139,9 +139,9 @@ As explained before, **all estimators** have **a fit** method, and since this is
 
    * **FIT METHOD:** This takes in **a 2d array X** for the feature data and **a 1d array y** for the target labels. Inside the fit method, we simply return self. This allows us to chain methods together, since the result on calling fit on the transformer is still the transformer object. This method is required to be compatible with scikit-learn.
    
-   * **TRANSFORM METHOD:** The transform function is where we include the code that well, transforms the data. In this case, we return the data in X multiplied by 10. This transform method also takes **a 2d array X**.
+   * **TRANSFORM METHOD:** The transform function is where we include the code that transforms the data. In this case, we return the data in X multiplied by 10. This transform method also takes **a 2d array X**.
 
-Let's test my new transformer, by entering the code below in the interactive python interpreter in the terminal, ipython. We can also do this in Jupyter notebook.
+Let's test the new transformer, which can also be done in Jupyter notebook.
 
 ~~~python
 multiplier = TenMultiplier()
@@ -154,7 +154,7 @@ This outputs the following:
 
      array([60, 30, 70, 40, 70])
      
-In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/5_custom_transformer.ipynb) I'll create **a custom transformer** that converts all text to lowercase. check it for more information.
+In [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/5_custom_transformer.ipynb) I'll create **a custom transformer** that converts all text to lowercase. check it out for more information.
 
 ## 5. Pipelines and Grid Search
 
@@ -179,7 +179,7 @@ clf = GridSearchCV(svc, parameters)
 clf.fit(X_train, y_train)
 ~~~
 
-Now consider if we had **a data preprocessing step**, where we standardized the data, for example  using **StandardScaler** like below.
+Now consider if we had **a data preprocessing step**, where we standardize the data, for example  using **StandardScaler** like below.
 
 ~~~python
 scaler = StandardScaler()
@@ -195,11 +195,16 @@ clf = GridSearchCV(svc, parameters)
 clf.fit(scaled_data, y_train)
 ~~~
 
-This may seem okay at first, but if you standardize your whole training dataset, and then use cross validation in grid search to evaluate your model, you've got **data leakage**, meaning, **Grid search uses cross validation to score your model, meaning it splits your training data into folds of train and validation sets, trains your model on the train set, and scores it on the validation set, and does this multiple times**.
+This may seem okay at first, but if you standardize your whole training dataset, and then use cross validation in grid search to evaluate your model, you've got **data leakage**, meaning, **Grid search uses cross validation to score your model, meaning it splits your training data into folds of train and validation sets, trains your model on the train set, and scores it on the validation set, and does this multiple times (see image below)**.
+
+<p align="center">
+  <img src="/Images/2.PNG" alt="" width="400" height="250" >
+ </p>
+
 
 However, each time, or fold, that this happens, the model already has knowledge of the validation set because all the data was rescaled based on the distribution of the whole training dataset. **Important factors like the mean and standard deviation are influenced by the whole dataset.** This means the model perform better than it really should on unseen data, since information about the validation set is always baked into the rescaled values of your train dataset.
 
-The way to fix this, would be to make sure you run standard scaler only on the training set, and not the validation set within each fold of cross validation. Pipelines allow you to do just this (see below).
+The way to fix this, make sure you run standard scaler only on the training set, and not the validation set within each fold of cross validation. Pipelines allow you to do just this (see below).
 
 ~~~python
 pipeline = Pipeline([
@@ -220,10 +225,10 @@ y_pred = cv.predict(X_test)
 
 ~~~
 
-Now, since the rescaling is included as part of the pipeline, **the standardization doesn't happen until we run grid search meaning in each fold of cross validation, the rescaling is done only on the data that the model is trained on, preventing leakage from the validation set**. As you can see, pipelines are very valuable to removing the risk of data leakage during the data preparation process.
+Now, since the rescaling is included as part of the pipeline, **the standardization doesn't happen until we run grid search meaning, in each fold of cross validation, the rescaling is done only on the data that the model is trained on, preventing leakage from the validation set**. As you can see, pipelines are very valuable to removing the risk of data leakage during the data preparation process.
 
 **Note on Run Time:** Running grid search can take a while, especially if you are searching over a lot of parameters! If you want to reduce it to a few minutes, try commenting out some of your parameters to grid search over just 1 or 2 parameters with a small number of values each. 
 
-Check out [this jupyter notebook]() to get more infomation about Pipelines and Grid Search.
+Check out [this jupyter notebook](https://github.com/A2Amir/Machine-Learning-Pipelines/blob/master/Code/6_grid_search.ipynb) to get more infomation about Pipelines and Grid Search.
 
 
